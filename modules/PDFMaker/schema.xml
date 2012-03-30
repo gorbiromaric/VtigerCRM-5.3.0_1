@@ -1,0 +1,86 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_pdfmaker</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_pdfmaker` (
+  `templateid` int(11) NOT NULL,
+  `filename` varchar(100) NOT NULL,
+  `module` varchar(255) NOT NULL,
+  `body` longblob NOT NULL,
+  `description` text NOT NULL,
+  `deleted` int(1) NOT NULL default '0',
+  PRIMARY KEY  (`templateid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_pdfmaker_seq</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_pdfmaker_seq` (
+  `id` int(11) NOT NULL default '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_pdfmaker_settings</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_pdfmaker_settings` (
+  `templateid` int(11) NOT NULL,
+  `margin_top` decimal(12,1) default NULL,
+  `margin_bottom` decimal(12,1) default NULL,
+  `margin_left` decimal(12,1) default NULL,
+  `margin_right` decimal(12,1) default NULL,
+  `format` varchar(255) NOT NULL default 'A4',
+  `orientation` varchar(255) NOT NULL default 'portrait',
+  `decimals` tinyint(2) NOT NULL,
+  `decimal_point` char(2) NOT NULL,
+  `thousands_separator` char(2) NOT NULL,
+  `header` text NOT NULL,
+  `footer` text NOT NULL,
+  `encoding` varchar(20) NOT NULL default 'auto',
+  `file_name` varchar(255) default NULL,
+  PRIMARY KEY  (`templateid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_pdfmaker_breakline</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_pdfmaker_breakline` (
+  `crmid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `sequence` int(11) NOT NULL,
+  `show_header` tinyint(1) NOT NULL default '0',
+  `show_subtotal` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`crmid`,`productid`,`sequence`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_pdfmaker_images</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_pdfmaker_images` (
+  `crmid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `sequence` int(11) NOT NULL,
+  `attachmentid` int(11) NOT NULL,
+  `width` int(11) default NULL,
+  `height` int(11) default NULL,
+  PRIMARY KEY  (`crmid`,`productid`,`sequence`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_pdfmaker_releases</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_pdfmaker_releases` (
+  `id` int(11) NOT NULL auto_increment,
+  `version` varchar(10) NOT NULL,
+  `date` datetime NOT NULL,
+  `updated` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_pdfmaker_userstatus</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_pdfmaker_userstatus` (
+  `templateid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `is_default` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`templateid`,`userid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>
